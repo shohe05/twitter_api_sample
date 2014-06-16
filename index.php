@@ -3,6 +3,12 @@ session_start();
 require_once("lib/twitteroauth.php");
 require_once("config.php");
 
+// ログインしていない場合は弾く
+if(!$_SESSION['oauth_token']) {
+    header('Location: login.php');
+    exit;
+}
+
 //OAuthオブジェクトを生成する
 $TwitterOAuth = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 

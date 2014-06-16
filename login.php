@@ -4,18 +4,9 @@ require_once('lib/twitteroauth.php');
 require_once('config.php');
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html;">
-<title>Twitter OAuth Login</title>
-</head>
-<body>
-
 <?php
 //セッションのアクセストークンのチェック
-if((isset($_SESSION['oauth_token']) && $_SESSION['oauth_token'] !== NULL) && (isset($_SESSION['oauth_token_secret']) && $_SESSION['oauth_token_secret'] !== NULL)):
+if($_SESSION['oauth_token']):
     header('Location: index.php');
 else:
     //OAuthオブジェクト生成
@@ -34,5 +25,3 @@ else:
     <a href="<?php echo $TwitterOAuth->getAuthorizeURL($_SESSION['request_token'], $bAuthorizeBoolean); ?>">ログイン</a>
 
 <?php endif; ?>
-</body>
-</html>
